@@ -96,8 +96,6 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Name</th>
-        <th>Neighborhood</th>
         </tr>
 
       <% @venues.each do |venue| %>
@@ -109,8 +107,7 @@
             </td>
         <td>
           <% if venue.neighborhood.present? %>
-            <a href="/neighborhoods/<%= venue.neighborhood.id %>">
-              <%= venue.neighborhood.name %>
+            <%= venue.neighborhood.name %>
             </a>
           <% end %>
         </td>

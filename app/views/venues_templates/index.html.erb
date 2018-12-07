@@ -102,7 +102,11 @@
 
       <% @venues.each do |venue| %>
       <tr>
-        <td><%= venue.name %></td>
+         
+        <td> 
+        <a href="/venues/<%= venue.id %>">
+            <%= venue.name %>
+            </td>
         <td>
           <% if venue.neighborhood.present? %>
             <a href="/neighborhoods/<%= venue.neighborhood.id %>">

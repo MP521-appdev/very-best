@@ -50,18 +50,15 @@
               Places You've Bookmarked
         </tr>
 
-      <% @venues.each do |venue| %>
+      <% Bookmark.where(user_id: current_user.id).each do |venue| %>
       <tr>
          
         <td> 
-        <a href="/venues/<%= venue.id %>">
-            <%= venue.name %>
+        <a href="/venues/<%= venue.venue_id %>">
+            <%= Venue.find(venue.venue_id).name %>
             </td>
         <td>
-          <% if venue.neighborhood.present? %>
-            <%= venue.neighborhood.name %>
-            </a>
-          <% end %>
+          
         </td>
       </tr>
       <% end %>

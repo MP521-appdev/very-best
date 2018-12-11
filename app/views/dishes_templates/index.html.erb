@@ -23,7 +23,6 @@
   <% end %>
   </div>
   
-
   <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
       <a href="/dishes" class="btn btn-secondary btn-block mb-1">Clear filters</a>
@@ -39,6 +38,7 @@
     <table class="table table-striped table-hover">
       <tr>
         <th>The very best...</th>
+        <th>is at...</th>
         <th></th>
       </tr>
 
@@ -47,13 +47,47 @@
         <td>
           <a href="/dishes/<%= dish.id %>">
             <%= dish.name %>
-          </td>
+        </td>
+        
+        <td>
+          <% if dish.bookmarks.count == 0 %>
+            <form action="/create_bookmark" class="form-inline" method="post">
+              <!-- Label and input for venue_id -->
+              <div class="form-group">
+                <label for="venue_id" class="control-label">
+                  Choose a venue...
+                </label>
+                <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name, @bookmark.try(:venue_id)), :class => "form-control") %>
+              </div>
+              
+              <!-- Label and input for dish_id -->
+              <input type="hidden" name="dish_id" value="<%= dish.id %>">
+                
+              <!-- Label and input for user_id -->
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          
+              <!-- Label and input for notes -->
+              <input type="hidden" name="notes" value="">
+              
+            <button class="btn btn-primary btn-sm">
+              <i class="fa fa-heart"></i>
+            </button>
+            
+          <% else %>
+          <% Bookmark.where(dish_id: dish.id).each do |bookmark| %>
+            <a href="/venues/<%= Venue.find(bookmark.venue_id).id %>">
+              <%= Venue.find(bookmark.venue_id).name %>
+            <% end %>
+          <% end %>
+        </td>
+ 
         <td>
           <% if dish.cuisine.present? %>
               <%= dish.cuisine.name %>
             </a>
           <% end %>
         </td>
+        
       </tr>
       <% end %>
     </table>

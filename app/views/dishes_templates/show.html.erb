@@ -51,7 +51,7 @@
                       <%= venue.name %>
                     </a>
                     <small class="float-right text-muted">
-                      <%= venue.updated_at %>
+                      <%= time_ago_in_words (venue.updated_at) %> ago
                       <a href="/bookmarks/5597/edit">
                         <i class="fa fa-fw fa-edit"></i>
                       </a>

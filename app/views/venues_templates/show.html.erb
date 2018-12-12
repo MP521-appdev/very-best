@@ -29,7 +29,7 @@
 
       <% @venue.bookmarks.each do |bookmark| %>
         <li class="list-group-item">
-            <%= bookmark.dish_id %>
+            <%= Dish.find(bookmark.dish_id).name %>
           </a>
           <div class="btn-group btn-group-xs float-right">
             <a href="/bookmarks/<%= bookmark.id %>/edit" class="btn btn-warning">

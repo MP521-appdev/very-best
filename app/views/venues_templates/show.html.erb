@@ -29,8 +29,12 @@
 
       <% @venue.bookmarks.each do |bookmark| %>
         <li class="list-group-item">
+         
             <%= Dish.find(bookmark.dish_id).name %>
           </a>
+          <div class="float-right">
+            <%= time_ago_in_words(bookmark.created_at) %> ago
+          </div>
           <div class="btn-group btn-group-xs float-right">
             <a href="/bookmarks/<%= bookmark.id %>/edit" class="btn btn-warning">
               <i class="fa fa-edit"></i>
@@ -60,14 +64,7 @@
       <!-- Label and input for user_id -->
       <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
-      <!-- Label and input for notes -->
-      <div class="form-group">
-        <label for="notes" class="control-label">
-          Notes
-        </label>
-
-        <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"></textarea>
-      </div>
+     
 
       <button class="fa fa-heart">
         

@@ -50,20 +50,23 @@ Places You've Bookmarked
               
         </tr>
 
-      <% Bookmark.where(user_id: current_user.id).each do |bookmark| %>
+ <% @bookmarkedvenues.each do |venue| %>
       <tr>
          
         <td> 
-        <a href="/venues/<%= bookmark.venue_id %>">
-            <%= Venue.find(bookmark.venue_id).name %>
+        <a href="/venues/<%= venue.id %>">
+            <%= venue.name %>
             </td>
         <td>
-          <%= Neighborhood.find(Venue.find(bookmark.venue_id).neighborhood_id).name %>, Chicago
+          <% if venue.neighborhood.present? %>
+            <%= venue.neighborhood.name %>
+            </a>
+          <% end %>
         </td>
       </tr>
       <% end %>
     </table>
-    <%= paginate @venues, theme: 'twitter-bootstrap-4' %>
+    <%= paginate @bookmarkedvenues, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>
 
@@ -77,3 +80,4 @@ Places You've Bookmarked
     handler.fitMapToBounds();
   });
 </script>
+

@@ -50,7 +50,7 @@
         </td>
         
         <td>
-          <% if dish.bookmarks.count == 0 %>
+          <% if Bookmark.where(dish_id: dish.id, user_id: current_user.id).count == 0 %>
             <form action="/create_bookmark" class="form-inline" method="post">
               <!-- Label and input for venue_id -->
               <div class="form-group">
@@ -74,7 +74,7 @@
             </button>
             
           <% else %>
-          <% Bookmark.where(dish_id: dish.id).each do |bookmark| %>
+          <% Bookmark.where(dish_id: dish.id, user_id: current_user.id).each do |bookmark| %>
             <a href="/venues/<%= Venue.find(bookmark.venue_id).id %>">
               <%= Venue.find(bookmark.venue_id).name %>
             <% end %>

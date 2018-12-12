@@ -49,6 +49,8 @@
       <li class="list-group-item">
         <form action="/create_bookmark" method="post">
 
+
+
       <!-- Label and input for dish_id -->
       <div class="form-group">
         <label for="dish_id" class="control-label">
@@ -58,6 +60,8 @@
         <%= select_tag(:dish_id, options_from_collection_for_select(Dish.all, :id, :name), :class => "form-control") %>
       </div>
 
+ <input type="hidden" name="notes" value="">
+ 
       <!-- Label and input for venue_id -->
       <input type="hidden" name="venue_id" value="<%= @venue.id %>">
 

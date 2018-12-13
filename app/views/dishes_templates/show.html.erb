@@ -52,13 +52,15 @@
                       <%= venue.name %>
                     </a>
                     <small class="float-right text-muted">
-                      <%= time_ago_in_words(venue.updated_at) %> ago
-                      <a href="/bookmarks/5597/edit">
+                      <% Bookmark.where(venue_id: venue.id, dish_id: @dish.id).each do |bookmark|%>
+                      <%= time_ago_in_words(bookmark.updated_at) %> ago
+                      <a href="/bookmarks/<%= bookmark.id %>/edit">
                         <i class="fa fa-fw fa-edit"></i>
                       </a>
-                      <a href="/delete_bookmark/5597">
+                      <a href="/delete_bookmark/<%= bookmark.id %>">
                         <i class="fa fa-fw fa-trash-o"></i>
                       </a>
+                      <% end %>
                     </small>
                   </p>
                 </li>

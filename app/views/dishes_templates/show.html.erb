@@ -23,10 +23,11 @@
               <!-- Label and input for venue_id -->
                 <div class="form-group mr-sm-1">
                 <label for="venue_id" class="control-label">
-                  Choose a Venue...
+                  <select name = "venue_id" id ="venue_id">
+                    <%= options_from_collection_for_select(Venue.all, :id, :name) %>
+                 <option selected> Choose a venue... </option> 
+                </select>
                 </label>
-                  <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
-                </div>
   
               <!-- Label and input for user_id -->
                 <input type="hidden" name="user_id" value="<%= current_user.id %>">
